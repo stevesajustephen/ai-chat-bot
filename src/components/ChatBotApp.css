@@ -67,3 +67,80 @@
     color: #fff
 
 }
+
+.chat-list-item i {
+    font-size: 2.5rem;
+    color:  #f42f5f
+}
+
+.chat-window {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-title {
+    width: 100%;
+    min-height: 8rem;
+    background-color: #0d111a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 2rem;
+}
+
+.chat-title h3 {
+    font-family: "Exo 2", sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: .1rem;
+}
+
+.arrow {
+    font-size: 4rem;
+    color: #7b8ebc;
+}
+
+.chat {
+    width: 100%;
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4rem;
+    color: #fff;
+}
+
+.prompt, .response {
+    max-width: 80%;
+    padding: 2rem;
+    font-size: 1.6rem;
+    color: #fff;
+    box-shadow: 0 1rem 3rem rgba(139, 133, 133, 0.5);
+}
+
+.prompt {
+    background: linear-gradient(135deg, #f42f5f, #8e25ef);
+    display: flex;
+    align-self: flex-end;
+    border-radius: 3rem 0 3rem 3rem;
+    text-align: right;
+}
+
+.response {
+    background: linear-gradient(135deg, #fe8d5c, #fe4d57);
+    border-radius:0 3rem 3rem 3rem;
+    align-self: flex-start;
+    text-align: left     ;
+}
+
+.prompt span, .response span {
+    font-family: "Exo 2", sans-serif;
+    font-size: 1.4rem;
+    display: block;
+    margin-top: .5rem;
+}

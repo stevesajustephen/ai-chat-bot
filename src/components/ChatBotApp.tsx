@@ -28,14 +28,18 @@ const ChatBotApp = () => {
       <div className="chat-window">
         <div className="chat-title">
           <h3>Chat with AI</h3>
-          <i className="bx-bx-arrow-back arrow"></i>
+          <i className="bx bx-arrow-back arrow"></i>
         </div>
 
         <div className="chat">
-          <div className="prompt">Hi, how are you?</div>
-          <span>12:59:51 PM</span>
-          <div className="response">Hello, this is a AI chat </div>
-          <span>12:59:51 PM</span>
+          <div className="prompt">
+            Hi, how are you? <span>12:59:51 PM</span>
+          </div>
+
+          <div className="response">
+            Hello, this is a AI chat <span>12:59:51 PM</span>
+          </div>
+
           <div className="typing">Typing...</div>
         </div>
 
