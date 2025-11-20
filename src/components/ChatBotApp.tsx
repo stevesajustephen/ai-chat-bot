@@ -44,7 +44,7 @@ const ChatBotApp = () => {
         </div>
 
         <form className="msg-form">
-          <i className="fa-solid fa-face smile emoji"></i>
+          <i className="fa-solid fa-face-smile emoji"></i>
           <input
             type="text"
             className="msg-input"
