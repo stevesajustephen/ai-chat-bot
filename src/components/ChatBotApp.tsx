@@ -1,7 +1,11 @@
 import React from "react";
 import "./ChatBotApp.css";
 
-const ChatBotApp = () => {
+interface IChatBotAppProps {
+  setStartPage: (value: boolean) => void;
+}
+
+const ChatBotApp = ({ setStartPage }: IChatBotAppProps) => {
   return (
     <div className="chat-app">
       <div className="chat-list">
@@ -28,7 +32,12 @@ const ChatBotApp = () => {
       <div className="chat-window">
         <div className="chat-title">
           <h3>Chat with AI</h3>
-          <i className="bx bx-arrow-back arrow"></i>
+          <i
+            onClick={() => setStartPage(true)}
+            className="bx bx-arrow-back arrow"
+          >
+            back
+          </i>
         </div>
 
         <div className="chat">

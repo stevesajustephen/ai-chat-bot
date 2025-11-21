@@ -1,10 +1,21 @@
 import React from "react";
 import "./ChatBotStart.css";
 
-const ChatBotStart = () => {
+interface IStartPageProps {
+  setStartPage: (value: boolean) => void;
+}
+
+const ChatBotStart = ({ setStartPage }: IStartPageProps) => {
   return (
     <div className="start-page">
-      <button className="start-page-btn">Chat AI</button>
+      <button
+        className="start-page-btn"
+        onClick={() => {
+          setStartPage(false);
+        }}
+      >
+        Chat AI
+      </button>
     </div>
   );
 };

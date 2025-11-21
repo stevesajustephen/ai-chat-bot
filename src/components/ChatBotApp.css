@@ -103,6 +103,7 @@
 .arrow {
     font-size: 4rem;
     color: #7b8ebc;
+    cursor: pointer;
 }
 
 .chat {
@@ -185,7 +186,7 @@
 }
 
 .msg-input::placeholder {
-    font-size: 1.8rem;
+    font-size: 1.8rem; 
     color: #7b8ebc;
     font-weight: 300;
 
