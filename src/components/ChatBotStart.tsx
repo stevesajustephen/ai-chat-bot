@@ -2,16 +2,16 @@ import React from "react";
 import "./ChatBotStart.css";
 
 interface IStartPageProps {
-  setStartPage: (value: boolean) => void;
+  beginChatSession: () => void;
 }
 
-const ChatBotStart = ({ setStartPage }: IStartPageProps) => {
+const ChatBotStart = ({ beginChatSession }: IStartPageProps) => {
   return (
     <div className="start-page">
       <button
         className="start-page-btn"
         onClick={() => {
-          setStartPage(false);
+          beginChatSession();
         }}
       >
         Chat AI
