@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import React, { useEffect, useState } from "react";
 import "./ChatBotApp.css";
 
 interface IChatBotAppProps {
@@ -11,12 +12,23 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
   const [inputValue, setInputValue] = useState("");
   const [currentChat, setCurrentChat] = useState(chats[0] ?? {});
 
+  useEffect(() => {
+    console.log(chats);
+    const updatedChats = chats.map((e) => {
+      if (e.id === currentChat.id) {
+        return currentChat;
+      } else {
+        return e;
+      }
+    });
+    setChats(updatedChats);
+  }, [currentChat]);
+
   function handleInputChange(e) {
     setInputValue(e.target?.value);
-    console.log(e.target.value);
   }
 
-  function sendMessage() {
+  function sendMessage(): void {
     if (inputValue.trim() == "") return;
     else {
       const updatedCurrentChat = structuredClone(currentChat);
@@ -25,32 +37,49 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
         text: inputValue,
         timestamp: new Date().toLocaleTimeString(),
       });
-      setCurrentChat(updatedCurrentChat);
+      console.log("updatedCurrentChat ", updatedCurrentChat);
       setInputValue("");
 
-      const updatedChats = chats.map((e) => {
-        if (e.id === currentChat.id) {
-          return currentChat;
-        } else {
-          return e;
-        }
-      });
-      setChats(updatedChats);
+      setCurrentChat(updatedCurrentChat);
     }
   }
 
+  function newChatSession() {
+    const newChat = {
+      id: `chat ${new Date().toLocaleDateString(
+        "en-GB"
+      )} ${new Date().toLocaleTimeString()}`,
+      messages: [
+        {
+          type: "response",
+          text: "hello I am AI Agent, talk to me",
+          timestamp: new Date().toLocaleTimeString(),
+        },
+      ],
+    };
+    setCurrentChat(newChat);
+    setChats([...chats, newChat].reverse());
+  }
   return (
     <div className="chat-app">
       <div className="chat-list">
         <div className="chat-list-header">
           <h2>Chat List</h2>
-          <i className="bx bx-edit-alt">New Chat</i>
+          <i onClick={newChatSession} className="bx bx-edit-alt">
+            New Chat
+          </i>
         </div>
-        {chats.map((e, i) => {
+        {chats.reverse().map((e, i) => {
           return (
-            <div className="chat-list-item active">
+            <div
+              onClick={() => setCurrentChat(chats[i])}
+              className={`chat-list-item ${
+                e.id === currentChat.id ? "active" : ""
+              }`}
+            >
               <h4>{e?.id}</h4>
               <i className="bx bx-x cicle"></i>
+              <input type="text" value={i} hidden />
             </div>
           );
         })}

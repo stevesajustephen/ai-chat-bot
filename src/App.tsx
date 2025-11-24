@@ -6,7 +6,6 @@ import ChatBotStart from "./components/ChatBotStart";
 function App() {
   const [isStartPage, setStartPage] = useState(true);
   const [chats, setChats] = useState([]);
-  console.log(chats);
   function goToStartPage() {
     setStartPage(true);
   }
