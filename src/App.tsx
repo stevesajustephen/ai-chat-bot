@@ -19,7 +19,13 @@ function App() {
         id: `chat ${new Date().toLocaleDateString(
           "en-GB"
         )} ${new Date().toLocaleTimeString()}`,
-        messages: [],
+        messages: [
+          {
+            type: "response",
+            text: "hello I am AI Agent, talk to me",
+            timestamp: new Date().toLocaleTimeString(),
+          },
+        ],
       };
       setChats([newChat]);
     }

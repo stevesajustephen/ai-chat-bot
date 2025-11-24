@@ -4,7 +4,7 @@ import "./ChatBotApp.css";
 interface IChatBotAppProps {
   goToStartPage: () => void;
   chats: unknown[];
-  setChats: () => void;
+  setChats: (newState: unknown) => void;
 }
 
 const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
@@ -20,11 +20,22 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
     if (inputValue.trim() == "") return;
     else {
       const updatedCurrentChat = structuredClone(currentChat);
-      updatedCurrentChat?.messages?.push(inputValue);
+      updatedCurrentChat?.messages?.push({
+        type: "prompt",
+        text: inputValue,
+        timestamp: new Date().toLocaleTimeString(),
+      });
       setCurrentChat(updatedCurrentChat);
       setInputValue("");
 
-      console.log(currentChat?.messages);
+      const updatedChats = chats.map((e) => {
+        if (e.id === currentChat.id) {
+          return currentChat;
+        } else {
+          return e;
+        }
+      });
+      setChats(updatedChats);
     }
   }
 
@@ -54,13 +65,13 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
         </div>
 
         <div className="chat">
-          <div className="prompt">
-            Hi, how are you? <span>12:59:51 PM</span>
-          </div>
-
-          <div className="response">
-            Hello, this is a AI chat <span>12:59:51 PM</span>
-          </div>
+          {currentChat.messages.map((e, i) => {
+            return (
+              <div className={e.type === "prompt" ? "prompt" : "response"}>
+                {e.text} <span>{e.timestamp}</span>
+              </div>
+            );
+          })}
 
           <div className="typing">Typing...</div>
         </div>
@@ -69,6 +80,12 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
           <i className="fa-solid fa-face-smile emoji"></i>
           <input
             onChange={handleInputChange}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                sendMessage();
+              }
+            }}
             value={inputValue}
             type="text"
             className="msg-input"
