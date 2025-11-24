@@ -58,7 +58,7 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
       ],
     };
     setCurrentChat(newChat);
-    setChats([...chats, newChat].reverse());
+    setChats([newChat, ...chats]);
   }
   return (
     <div className="chat-app">
