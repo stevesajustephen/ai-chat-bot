@@ -27,7 +27,8 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
     setInputValue(e.target?.value);
   }
 
-  function sendMessage(): void {
+  async function sendMessage(): void {
+    const apiKey = "";
     if (inputValue.trim() == "") return;
     else {
       const updatedCurrentChat = structuredClone(currentChat);
@@ -38,7 +39,47 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
       });
       setInputValue("");
 
-      setCurrentChat(updatedCurrentChat);
+      try {
+        const response = await fetch(
+          "https://api.openai.com/v1/chat/completions",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+              model: "gpt-3.5-turbo",
+              messages: [{ role: "user", content: "hello how are you" }],
+              max_tokens: 500,
+            }),
+          }
+        );
+
+        const data = await response.json();
+        const chatResponse = data.choices[0].message.content.trim();
+
+        const newResponse = {
+          type: "response",
+          text: chatResponse,
+          timestamp: new Date().toLocaleTimeString(),
+        };
+        updatedCurrentChat?.messages?.push(newResponse);
+
+        setCurrentChat(updatedCurrentChat);
+      } catch (err) {
+        console.log("error occured, integrate api key");
+
+        const newResponse = {
+          type: "response",
+          text: "something went wrong",
+          timestamp: new Date().toLocaleTimeString(),
+        };
+
+        updatedCurrentChat?.messages?.push(newResponse);
+
+        setCurrentChat(updatedCurrentChat);
+      }
     }
   }
 
