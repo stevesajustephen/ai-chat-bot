@@ -13,7 +13,6 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
   const [currentChat, setCurrentChat] = useState(chats[0] ?? {});
 
   useEffect(() => {
-    console.log(chats);
     const updatedChats = chats.map((e) => {
       if (e.id === currentChat.id) {
         return currentChat;
@@ -37,7 +36,6 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
         text: inputValue,
         timestamp: new Date().toLocaleTimeString(),
       });
-      console.log("updatedCurrentChat ", updatedCurrentChat);
       setInputValue("");
 
       setCurrentChat(updatedCurrentChat);
@@ -65,9 +63,7 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
       <div className="chat-list">
         <div className="chat-list-header">
           <h2>Chat List</h2>
-          <i onClick={newChatSession} className="bx bx-edit-alt">
-            New Chat
-          </i>
+          <i onClick={newChatSession} className="bx bx-edit-alt"></i>
         </div>
         {chats.reverse().map((e, i) => {
           return (
