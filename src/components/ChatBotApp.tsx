@@ -48,6 +48,7 @@ const ChatBotApp = ({ goToStartPage, chats, setChats }: IChatBotAppProps) => {
               "Content-Type": "application/json",
               Authorization: `Bearer ${apiKey}`,
             },
+            //gpt
             body: JSON.stringify({
               model: "gpt-3.5-turbo",
               messages: [{ role: "user", content: "hello how are you" }],
